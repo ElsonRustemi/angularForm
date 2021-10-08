@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder  } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-form',
@@ -10,6 +11,8 @@ import { Validators } from '@angular/forms';
 export class UserFormComponent implements OnInit {
 
   userForm;
+
+  isUserLoggedIn = false;
   
   educationLevel = [
     { name: 'Select Profile', short: 'SP' },
@@ -39,11 +42,21 @@ export class UserFormComponent implements OnInit {
   //   phone: new FormControl("", Validators.required)
   // })
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   
 
   ngOnInit(): void {
+
+    let storeData = localStorage.getItem("isUserLoggedIn");
+      console.log("StoreData: " + storeData);
+
+      if( storeData != null && storeData == "true")
+        this.isUserLoggedIn = true;
+      else
+
+
+        this.isUserLoggedIn = false;
 
     this.userForm = this.fb.group({
       firstname: ['', [Validators.required] ],

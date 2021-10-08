@@ -13,11 +13,17 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserFormComponent
+    UserFormComponent,
+    LoginComponent,
+    LogoutComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

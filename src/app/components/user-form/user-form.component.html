@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="p-d-flex p-flex-column" class="radioButton">
-                    <label for="Gender" class="genderLabel">Select Gender</label>
+                    <label for="Gender" class="">Select Gender</label>
                     <div class="formgrid grid">
                         <p-radioButton class="m-2" value="Female" formControlName="gender" value="Female" label="Female"
                             #gender>{{gender[0]}}</p-radioButton>
@@ -36,46 +36,41 @@
             </div>
 
             <div class="formgrid grid">
-                <div class="field col-12 md:col-3">
-                    <label for="phone" class="phoneLabel">Phone</label>
-                    <div class="phone" formArrayName="phone"
-                        *ngFor="let phone of userForm.get('phone').controls; let i=index" >git 
-                        <div [formGroupName]="i">
-                            <input pInputText id="phone" type="number" class="inputfield w-full" formControlName="phone"
+                <div class="p-d-flex p-flex-column">
+                    <label for="phone" class="m-2">Phone</label>
+                    <div formArrayName="phone"
+                        *ngFor="let phone of userForm.get('phone').controls; let i=index">
+                        <div [formGroupName]="i" class="inline-flex card-container m-2">
+                            <input pInputText id="phone" type="number" class="inputfield w-full flex-1" formControlName="phone"
                                 placeholder="Enter Phone Number">
+                                <button class="flex-1 ml-2" pButton label="Add Phone Number" type="button"
+                                (click)="addPhoneNumber()"></button>
                         </div>
                     </div>
-                </div>
-
-                <div>
-                    <button class="addPhone" pButton label="Add Phone Number" type="button"
-                        (click)="addPhoneNumber()"></button>
                 </div>
             </div>
 
             <div class="formgrid grid">
-                <label for="education" class="educationLabel">Select Education</label>
-                <div class="field col-12 md:col-3">
+                <div class="p-d-flex p-flex-column">
+                <label for="education" class="m-2">Select Education</label>
                     <div formArrayName="education">
-                        <div *ngFor="let education of educationControls; let i=index" class="educationDropdown">
-                            <p-dropdown [options]="educationLevel" [formControlName]="i" placeholder="Select Education"
+                        <div *ngFor="let education of educationControls; let i=index" class="inputfield w-full flex-1 mt-2">
+                            <p-dropdown class="inline-flex card-container ml-2" [options]="educationLevel" [formControlName]="i" placeholder="Select Education"
                                 optionLabel="name" optionValue="short">
                             </p-dropdown>
+                            <button class="flex-1 ml-2" pButton type="button" label="Add Education"
+                                (click)="addEducationField()"></button>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button class="addEducationButton" pButton type="button" label="Add Education"
-                        (click)="addEducationField()"></button>
-                </div>
             </div>
 
-            <div class="formgrid grid" class="selectProfile">
-                <div class="field col-12 md:col-3">
-                    <label for="profile" class="labelProfile">Select Profile</label>
-                    <div class="p-d-flex p-flex-column">
-                        <p-dropdown class="m-2" [options]="profiles" formControlName="profile" optionLabel="name"
-                            optionValue="short" placeholder="Select Profile" [style]="{'width':'39%'}">
+            <div class="formgrid grid">
+                <div class="p-d-flex p-flex-column mt-2">
+                    <label for="profile" class="m-2">Select Profile</label>
+                    <div class="inputfield w-full flex-1 mt-2 ml-2">
+                        <p-dropdown [options]="profiles" formControlName="profile" optionLabel="name"
+                            optionValue="short" placeholder="Select Profile">
                         </p-dropdown>
                     </div>
                 </div>
@@ -85,77 +80,26 @@
 
         <div class="formStatus">
             <p>Form status: {{userForm.status}}.</p>
-            <span *ngIf="!userForm.valid" style="margin-top: 25px;">Please fill all the areas with the appropriate
+            <span *ngIf="!userForm.valid">Please fill all the areas with the appropriate
                 information then click Submit.</span>
+
+                <div class="flex justify-content-center mr-7">
+                    <button [disabled]="!userForm.valid" pButton type="submit" label="Submit"></button>
+                </div>
+
         </div>
-        <button class="submitForm" [disabled]="!userForm.valid" pButton type="submit" label="Submit"></button>
 
     </div>
 </form>
 
+    <div *ngIf="!isUserLoggedIn; else isLogOut">
+        <button pButton label="Logout" routerLink="/logout"></button>
+    </div>
+
+    <ng-template #isLogOut>
+                <a class="nav-link" routerLink="/login">Login</a>
+    </ng-template>
 
 
+<router-outlet></router-outlet>
 
-                        <!-- <p-checkbox class="m-2" formControlName="gender" name="groupname" value="Female" label="Female" #gender>
-                                                    {{gender[0]}}</p-checkbox>
-                                                <p-checkbox class="m-2" formControlName="gender" name="groupname" value="Male" label="Male" #gender>
-                                                    {{gender[1]}}</p-checkbox>
-                                                <p-checkbox class="m-2" formControlName="gender" name="groupname" value="Not Specified" label="Not Specified"
-                                                    #gender>
-                                                    {{gender[2]}}</p-checkbox> -->
-                        
-                        
-                        <!-- <p-checkbox formControlName="gender" name="groupname" value="Female" label="Female" [(ngModel)]="selectGender"></p-checkbox>
-                                        <p-checkbox formControlName="gender" name="groupname" value="Male" label="Male" [(ngModel)]="selectGender"></p-checkbox> -->
-                        
-                        
-                        <!-- <div class="formgroup-inline">
-                                            <div class="field-radiobutton">
-                                                <input type="radio" id="gender">
-                                                <label for="gender">Female</label>
-                                            </div>
-                                            <div class="field-radiobutton">
-                                                <input type="radio" id="gender">
-                                                <label for="gender">Male</label>
-                                            </div> -->
-                        
-                        <!-- Firstname: <input formControlName="firstname" placeholder="Enter Firstname"> -->
-                        <!-- Lastname: <input formControlName="lastname" placeholder="Enter Lastname"> -->
-                        <!-- Age: <input formControlName="age" placeholder="Enter Age"> -->
-                        <!-- Gender: <input formControlName="gender" placeholder="Enter Gender"> -->
-                        <!-- Education: <input formControlName="education" placeholder="Enter Education">
-                        Profile: <input formControlName="profile" placeholder="Enter Profile">
-                        Phone: <input formControlName="phone" placeholder="Enter phone"> -->
-                        
-                        
-                        
-                        
-                        <!-- <div class="field col-12 md:col-3">
-                                            <label for="gender">Gender</label>
-                                            <div class="formgroup-inline">
-                                                <div class="field-radiobutton">
-                                                    <input type="radio" id="gender">
-                                                    <label for="gender">Female</label>
-                                                </div>
-                                                <div class="field-radiobutton">
-                                                    <input type="radio" id="gender">
-                                                    <label for="gender">Male</label>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                        
-                        
-                        <!-- <p-dropdown [options]="educationLevel" formControlName="education"></p-dropdown> -->
-                        
-                        <!-- <div class="field col-12 md:col-3">
-                                        <label for="education">Education</label>
-                                        <select id="education" class="w-full inputfield" style="appearance: auto">
-                                            <option value="" *ngFor="let ed of educationLevel" [ngValue]="ed.short"> {{ ed.name }} </option>
-                                        </select>
-                                    </div>
-                                    <div class="field col-12 md:col-3">
-                                        <label for="profile">Profile</label>
-                                        <select id="Profile" class="w-full inputfield" style="appearance: auto">
-                                            <option value="" *ngFor="let pf of profiles" [ngValue]="pf.short"> {{ pf.name }} </option>
-                                        </select>
-                                    </div> -->

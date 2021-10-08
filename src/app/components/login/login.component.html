@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="h-screen flex align-items-center justify-content-center">
+        <div class="shadow-4 p-2 m-5 w-max">
+            <div class="flex align-items-center justify-content-center">
+                <div class="col-3">
+                    <h3>
+                        Login
+                    </h3>
+                </div>
+            </div>
+            <form [formGroup]="formData" (ngSubmit)="onClickSubmit(formData.value)" class="">
+                <div class="flex align-items-center justify-content-center m-2">
+                    <label for="" class="col-md-6">Username</label>
+                    <div class="col-9">
+                        <input formControlName="userName" pInputText type="text" required>
+                    </div>
+                </div>
+        
+                <div class="flex align-items-center justify-content-center m-2">
+                    <label for="" class="col-md-6">Password</label>
+                    <div class="col-9">
+                        <input formControlName="password" pInputText id="" type="password" class="inputfield" required>
+                    </div>
+                </div>
+        
+                <div class="flex align-items-center justify-content-center m-2 ">
+                    <div class="col-3">
+                        <button pButton type="submit" label="Login"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+

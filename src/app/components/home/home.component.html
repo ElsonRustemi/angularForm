@@ -1,0 +1,17 @@
+
+
+
+
+    <div *ngIf="!isUserLoggedIn; else isLogOut">
+        <h3>Home</h3>
+        <button pButton label="Logout" routerLink="/logout"></button>
+        <!-- <a class="nav-link" routerLink="/logout">Logout</a> -->
+    </div>
+
+    <ng-template #isLogOut>
+                <a class="nav-link" routerLink="/login">Login</a>
+    </ng-template>
+
+
+
+<router-outlet></router-outlet>
